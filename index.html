@@ -18,7 +18,7 @@ chemistries: amd1 mth1
         {% assign cpd = site.compounds | where: "kegg_id", cpdname  | first %}
         {% include compound.html cpd=cpd %}
     {% endfor %}
-    <a href="/compounds.html" class="list-group-item list-group-item-action list-group-item-secondary d-flex gap-3 py-3" aria-current="true">
+    <a href="{{ site.url }}{{ site.baseurl }}/compounds.html" class="list-group-item list-group-item-action list-group-item-secondary d-flex gap-3 py-3" aria-current="true">
         <svg width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="rounded-circle flex-shrink-0" style="margin-top: 6px;">
             <path d="M7 12.5C7.27614 12.5 7.5 12.2761 7.5 12C7.5 11.7239 7.27614 11.5 7 11.5C6.72386 11.5 6.5 11.7239 6.5 12C6.5 12.2761 6.72386 12.5 7 12.5Z" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M12 12.5C12.2761 12.5 12.5 12.2761 12.5 12C12.5 11.7239 12.2761 11.5 12 11.5C11.7239 11.5 11.5 11.7239 11.5 12C11.5 12.2761 11.7239 12.5 12 12.5Z" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
@@ -40,7 +40,7 @@ chemistries: amd1 mth1
         {% assign chem = site.chemistries | where: "name", chemname  | first %}
         {% include chemistry.html chem=chem hide_enzyme_ids=true %}
     {% endfor %}
-    <a href="/chemistries.html" class="list-group-item list-group-item-action list-group-item-secondary d-flex gap-3 py-3" aria-current="true">
+    <a href="{{ site.url }}{{ site.baseurl }}/chemistries.html" class="list-group-item list-group-item-action list-group-item-secondary d-flex gap-3 py-3" aria-current="true">
         <svg width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="rounded-circle flex-shrink-0" style="margin-top: 6px;">
             <path d="M7 12.5C7.27614 12.5 7.5 12.2761 7.5 12C7.5 11.7239 7.27614 11.5 7 11.5C6.72386 11.5 6.5 11.7239 6.5 12C6.5 12.2761 6.72386 12.5 7 12.5Z" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M12 12.5C12.2761 12.5 12.5 12.2761 12.5 12C12.5 11.7239 12.2761 11.5 12 11.5C11.7239 11.5 11.5 11.7239 11.5 12C11.5 12.2761 11.7239 12.5 12 12.5Z" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>

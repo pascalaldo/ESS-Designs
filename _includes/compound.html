@@ -4,7 +4,7 @@
 {% else %}
     {% assign itemstyle = "list-group-item-info" %}
 {% endif %}
-<a href="/compounds/{{ cpd.kegg_id }}" class="list-group-item list-group-item-action {{ itemstyle }} d-flex gap-3 py-3" aria-current="true">
+<a href="{{ site.url }}{{ site.baseurl }}/compounds/{{ cpd.kegg_id }}" class="list-group-item list-group-item-action {{ itemstyle }} d-flex gap-3 py-3" aria-current="true">
     <svg width="24" stroke-width="1.5" height="24" viewBox="0 0 24 24" fill="#DDDDDD" xmlns="http://www.w3.org/2000/svg" class="rounded-circle flex-shrink-0" style="margin-top: 6px;">
         <path d="M4.40434 13.6099C3.51517 13.1448 3 12.5924 3 12C3 10.3431 7.02944 9 12 9C16.9706 9 21 10.3431 21 12C21 12.7144 20.2508 13.3705 19 13.8858" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M12 11.01L12.01 10.9989" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
