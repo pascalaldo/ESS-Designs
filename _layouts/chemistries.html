@@ -1,0 +1,9 @@
+---
+layout: default
+---
+
+<div class="col-12 list-group">
+    {% for chem in site.chemistries %}
+        {% include chemistry.html chem=chem %}
+    {% endfor %}
+</div>

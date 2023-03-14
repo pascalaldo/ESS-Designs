@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <style>
+        .rs-div dd {
+            margin-left: revert;
+            border: 1px solid #DDD;
+            padding: 6px;
+            border-radius: 0 0 4px 4px;
+        }
+        .rs-div dt {
+            border: 1px solid rgba(var(--bs-secondary-rgb), 0.4);
+            padding: 6px;
+            border-radius: 4px 4px 0px 4px;
+            background-color: rgba(var(--bs-secondary-rgb), 0.1);
+        }
+        .rs-div dt.rs-donor {
+            background-color: rgba(var(--bs-success-rgb), 0.3);
+            border-color: rgba(var(--bs-success-rgb))
+        }
+        .rs-div dt.rs-extra-subs {
+            background-color: rgba(var(--bs-primary-rgb), 0.3);
+            border-color: rgba(var(--bs-primary-rgb))
+        }
+        .rs-div dt.rs-product {
+            background-color: rgba(var(--bs-danger-rgb), 0.3);
+            border-color: rgba(var(--bs-danger-rgb))
+        }
+        .rs-div dl {
+            margin-bottom: 2px;
+        }
+        .list-group {
+            padding-left: 0.2rem;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <style>
+        table.dataTable td.dt-control::before {
+            border: 0;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        .progress {
+            position: relative;
+        }
+        .progress-bar-colored {
+            overflow: hidden;
+            z-index: 2;
+        }
+        .progress-bar-uncolored {
+            position: absolute;
+            height: 100%;
+            top: 0;
+            z-index: 1;
+            color: #0275D8;
+            background-color: revert;
+        }
+        .reversibility_info {
+            display: flex;
+            align-items: center;
+            width: 30em;
+            font-size: small;
+            font-variant: all-small-caps;
+            margin-left: 5em;
+        }
+        .reversibility_info .progress {
+            margin: 0 2em 0 2em;
+            width: 10em;
+            height: 0.75em;
+        }
+        .reversibility_info .progress .progress-bar {
+            height: 0.75em;
+        }
+    </style>
+</head>
+  <body>
+<div class="container py-3">
+    <nav class="row">
+        <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+            <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+                <svg width="32" stroke-width="1.5" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin: 0px 12px 0px 12px;">
+                    <path d="M4 4V12.2963C4 16.5509 7.58172 20 12 20C16.4183 20 20 16.5509 20 12.2963V4" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4 4H9.62963V10.8182C9.62963 12.0232 10.6909 13 12 13C13.3091 13 14.3704 12.0232 14.3704 10.8182V4H20" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 8L4 8" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M20 8L15 8" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            <span class="fs-4">Growth Coupling Compounds</span>
+            </a>
+
+            <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+            <a class="me-3 py-2 text-dark text-decoration-none" href="/compounds.html">All Compounds</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="/nonnative-compounds.html">Non-Native</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="/native-compounds.html">Native</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="/chemistries.html">Chemistries</a>
+            </nav>
+        </div>
+    </nav>
+    <header class="row">
+        <div class="p-3 pb-md-4 mx-auto text-center">
+            <h1 class="display-4 fw-normal"></h1>
+            
+            <p class="fs-5 text-muted"></p>
+        </div>
+    </header>
+    <main class="row justify-content-center">
+        <div class="col-12 py-4">
+    <h3>Welcome</h3>
+    <p>Here you can browse the growth coupling chemstries described in PAPER. Browse by compound or chemistry.</p>
+</div>
+<div class="col-12 pt-4 border-top">
+    <h5>Highlighted compounds</h5>
+    <p>Choose one of the highlighted compounds or browse all of them.</p>
+</div>
+
+<div class="col-12 list-group">
+    
+    
+        
+        
+
+<a href="/compounds/C07481" class="list-group-item list-group-item-action list-group-item-info d-flex gap-3 py-3" aria-current="true">
+    <svg width="24" stroke-width="1.5" height="24" viewBox="0 0 24 24" fill="#DDDDDD" xmlns="http://www.w3.org/2000/svg" class="rounded-circle flex-shrink-0" style="margin-top: 6px;">
+        <path d="M4.40434 13.6099C3.51517 13.1448 3 12.5924 3 12C3 10.3431 7.02944 9 12 9C16.9706 9 21 10.3431 21 12C21 12.7144 20.2508 13.3705 19 13.8858" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 11.01L12.01 10.9989" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M16.8827 6C16.878 4.97702 16.6199 4.25309 16.0856 3.98084C14.6093 3.22864 11.5832 6.20912 9.32664 10.6379C7.07005 15.0667 6.43747 19.2668 7.91374 20.019C8.44117 20.2877 9.16642 20.08 9.98372 19.5" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9.60092 4.25164C8.94056 3.86579 8.35719 3.75489 7.91369 3.98086C6.43742 4.73306 7.06999 8.93309 9.32658 13.3619C11.5832 17.7907 14.6092 20.7712 16.0855 20.019C17.3977 19.3504 17.0438 15.9577 15.3641 12.1016" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="d-flex gap-2 w-100 justify-content-between">
+        <div>
+            <h6 class="mb-0" style="word-wrap: anywhere;">Caffeine</h6>
+            <p class="mb-0 opacity-75">C07481
+                </p>
+        </div>
+        <div style="text-align: right; max-width: 50%;">
+            
+            <small class="opacity-50" style="word-wrap: anywhere;"><b>mth1</b></small><br />
+            <small class="opacity-50">2.1.1.160</small>
+            
+        </div>
+    </div>
+</a>
+    
+        
+        
+
+<a href="/compounds/C00487" class="list-group-item list-group-item-action  d-flex gap-3 py-3" aria-current="true">
+    <svg width="24" stroke-width="1.5" height="24" viewBox="0 0 24 24" fill="#DDDDDD" xmlns="http://www.w3.org/2000/svg" class="rounded-circle flex-shrink-0" style="margin-top: 6px;">
+        <path d="M4.40434 13.6099C3.51517 13.1448 3 12.5924 3 12C3 10.3431 7.02944 9 12 9C16.9706 9 21 10.3431 21 12C21 12.7144 20.2508 13.3705 19 13.8858" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 11.01L12.01 10.9989" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M16.8827 6C16.878 4.97702 16.6199 4.25309 16.0856 3.98084C14.6093 3.22864 11.5832 6.20912 9.32664 10.6379C7.07005 15.0667 6.43747 19.2668 7.91374 20.019C8.44117 20.2877 9.16642 20.08 9.98372 19.5" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9.60092 4.25164C8.94056 3.86579 8.35719 3.75489 7.91369 3.98086C6.43742 4.73306 7.06999 8.93309 9.32658 13.3619C11.5832 17.7907 14.6092 20.7712 16.0855 20.019C17.3977 19.3504 17.0438 15.9577 15.3641 12.1016" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="d-flex gap-2 w-100 justify-content-between">
+        <div>
+            <h6 class="mb-0" style="word-wrap: anywhere;">Carnitine</h6>
+            <p class="mb-0 opacity-75">C00487
+                
+                    , crn_c
+                </p>
+        </div>
+        <div style="text-align: right; max-width: 50%;">
+            
+            <small class="opacity-50" style="word-wrap: anywhere;"><b>hdx1</b></small><br />
+            <small class="opacity-50">1.14.11.1</small>
+            
+        </div>
+    </div>
+</a>
+    
+        
+        
+
+<a href="/compounds/C06672" class="list-group-item list-group-item-action list-group-item-info d-flex gap-3 py-3" aria-current="true">
+    <svg width="24" stroke-width="1.5" height="24" viewBox="0 0 24 24" fill="#DDDDDD" xmlns="http://www.w3.org/2000/svg" class="rounded-circle flex-shrink-0" style="margin-top: 6px;">
+        <path d="M4.40434 13.6099C3.51517 13.1448 3 12.5924 3 12C3 10.3431 7.02944 9 12 9C16.9706 9 21 10.3431 21 12C21 12.7144 20.2508 13.3705 19 13.8858" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 11.01L12.01 10.9989" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M16.8827 6C16.878 4.97702 16.6199 4.25309 16.0856 3.98084C14.6093 3.22864 11.5832 6.20912 9.32664 10.6379C7.07005 15.0667 6.43747 19.2668 7.91374 20.019C8.44117 20.2877 9.16642 20.08 9.98372 19.5" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9.60092 4.25164C8.94056 3.86579 8.35719 3.75489 7.91369 3.98086C6.43742 4.73306 7.06999 8.93309 9.32658 13.3619C11.5832 17.7907 14.6092 20.7712 16.0855 20.019C17.3977 19.3504 17.0438 15.9577 15.3641 12.1016" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="d-flex gap-2 w-100 justify-content-between">
+        <div>
+            <h6 class="mb-0" style="word-wrap: anywhere;">Vanillate</h6>
+            <p class="mb-0 opacity-75">C06672
+                </p>
+        </div>
+        <div style="text-align: right; max-width: 50%;">
+            
+            <small class="opacity-50" style="word-wrap: anywhere;"><b>mth2</b></small><br />
+            <small class="opacity-50">2.1.1.341</small>
+            
+        </div>
+    </div>
+</a>
+    
+    <a href="/compounds.html" class="list-group-item list-group-item-action list-group-item-secondary d-flex gap-3 py-3" aria-current="true">
+        <svg width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="rounded-circle flex-shrink-0" style="margin-top: 6px;">
+            <path d="M7 12.5C7.27614 12.5 7.5 12.2761 7.5 12C7.5 11.7239 7.27614 11.5 7 11.5C6.72386 11.5 6.5 11.7239 6.5 12C6.5 12.2761 6.72386 12.5 7 12.5Z" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 12.5C12.2761 12.5 12.5 12.2761 12.5 12C12.5 11.7239 12.2761 11.5 12 11.5C11.7239 11.5 11.5 11.7239 11.5 12C11.5 12.2761 11.7239 12.5 12 12.5Z" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M17 12.5C17.2761 12.5 17.5 12.2761 17.5 12C17.5 11.7239 17.2761 11.5 17 11.5C16.7239 11.5 16.5 11.7239 16.5 12C16.5 12.2761 16.7239 12.5 17 12.5Z" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="d-flex gap-2 w-100 justify-content-between" style="margin-top: 6px;">
+            <h6 class="mb-0">More compounds</h6>
+        </div>
+    </a>
+</div>
+<div class="col-12 pt-4">
+    <h5>Highlighted chemistries</h5>
+    <p>Choose one of the highlighted chemistries or browse all of them.</p>
+</div>
+<div class="col-12 list-group">
+    
+    
+        
+        <a href="/chemistries/amd1" class="list-group-item list-group-item-action list-group-item-success d-flex gap-3 py-3" aria-current="true">
+    <svg width="24" stroke-width="1.5" height="24" viewBox="0 0 24 24" fill="#DDDDDD" xmlns="http://www.w3.org/2000/svg" class="rounded-circle flex-shrink-0" style="margin-top: 6px;">
+        <path d="M18.5 15L5.5 15" stroke="currentColor"  stroke-linejoin="round"/>
+        <path d="M16 4L8 4" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 4.5L9 10.2602C9 10.7376 8.82922 11.1992 8.51851 11.5617L3.48149 17.4383C3.17078 17.8008 3 18.2624 3 18.7398V19C3 20.1046 3.89543 21 5 21L19 21C20.1046 21 21 20.1046 21 19V18.7398C21 18.2624 20.8292 17.8008 20.5185 17.4383L15.4815 11.5617C15.1708 11.1992 15 10.7376 15 10.2602L15 4.5" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 9.01L12.01 8.99889" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M11 2.01L11.01 1.99889" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    <div class="d-flex gap-2 w-100 justify-content-between">
+        <div>
+            <h6 class="mb-0">amd1</h6>
+            <p class="mb-0 opacity-75">R + arg__L_c &rarr; R-amidine + orn_c</p>
+        </div>
+        <div style="text-align: right; max-width: 50%;">
+            <small class="opacity-50" style="word-wrap: anywhere;"><b>Amidinotransferase</b></small>
+            
+        </div>
+    </div>
+</a>
+    
+        
+        <a href="/chemistries/mth1" class="list-group-item list-group-item-action list-group-item-success d-flex gap-3 py-3" aria-current="true">
+    <svg width="24" stroke-width="1.5" height="24" viewBox="0 0 24 24" fill="#DDDDDD" xmlns="http://www.w3.org/2000/svg" class="rounded-circle flex-shrink-0" style="margin-top: 6px;">
+        <path d="M18.5 15L5.5 15" stroke="currentColor"  stroke-linejoin="round"/>
+        <path d="M16 4L8 4" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 4.5L9 10.2602C9 10.7376 8.82922 11.1992 8.51851 11.5617L3.48149 17.4383C3.17078 17.8008 3 18.2624 3 18.7398V19C3 20.1046 3.89543 21 5 21L19 21C20.1046 21 21 20.1046 21 19V18.7398C21 18.2624 20.8292 17.8008 20.5185 17.4383L15.4815 11.5617C15.1708 11.1992 15 10.7376 15 10.2602L15 4.5" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 9.01L12.01 8.99889" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M11 2.01L11.01 1.99889" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    <div class="d-flex gap-2 w-100 justify-content-between">
+        <div>
+            <h6 class="mb-0">mth1</h6>
+            <p class="mb-0 opacity-75">R + amet_c &rarr; R-methylated + ahcys_c</p>
+        </div>
+        <div style="text-align: right; max-width: 50%;">
+            <small class="opacity-50" style="word-wrap: anywhere;"><b>Methyltransferases</b></small>
+            
+        </div>
+    </div>
+</a>
+    
+    <a href="/chemistries.html" class="list-group-item list-group-item-action list-group-item-secondary d-flex gap-3 py-3" aria-current="true">
+        <svg width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="rounded-circle flex-shrink-0" style="margin-top: 6px;">
+            <path d="M7 12.5C7.27614 12.5 7.5 12.2761 7.5 12C7.5 11.7239 7.27614 11.5 7 11.5C6.72386 11.5 6.5 11.7239 6.5 12C6.5 12.2761 6.72386 12.5 7 12.5Z" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 12.5C12.2761 12.5 12.5 12.2761 12.5 12C12.5 11.7239 12.2761 11.5 12 11.5C11.7239 11.5 11.5 11.7239 11.5 12C11.5 12.2761 11.7239 12.5 12 12.5Z" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M17 12.5C17.2761 12.5 17.5 12.2761 17.5 12C17.5 11.7239 17.2761 11.5 17 11.5C16.7239 11.5 16.5 11.7239 16.5 12C16.5 12.2761 16.7239 12.5 17 12.5Z" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="d-flex gap-2 w-100 justify-content-between" style="margin-top: 6px;">
+            <h6 class="mb-0">More chemistries</h6>
+        </div>
+    </a>
+</div>
+
+    </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+<script>
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+---
+layout: default
+compounds: C07481 C00487 C06672
+chemistries: amd1 mth1
+---
+<div class="col-12 py-4">
+    <h3>Welcome</h3>
+    <p>Here you can browse the growth coupling chemstries described in PAPER. Browse by compound or chemistry.</p>
+</div>
+<div class="col-12 pt-4 border-top">
+    <h5>Highlighted compounds</h5>
+    <p>Choose one of the highlighted compounds or browse all of them.</p>
+</div>
+
+<div class="col-12 list-group">
+    {% assign cpdlist = page.compounds | split: ' ' %}
+    {% for cpdname in cpdlist %}
+        {% assign cpd = site.compounds | where: "kegg_id", cpdname  | first %}
+        {% include compound.html cpd=cpd %}
+    {% endfor %}
+    <a href="/compounds.html" class="list-group-item list-group-item-action list-group-item-secondary d-flex gap-3 py-3" aria-current="true">
+        <svg width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="rounded-circle flex-shrink-0" style="margin-top: 6px;">
+            <path d="M7 12.5C7.27614 12.5 7.5 12.2761 7.5 12C7.5 11.7239 7.27614 11.5 7 11.5C6.72386 11.5 6.5 11.7239 6.5 12C6.5 12.2761 6.72386 12.5 7 12.5Z" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 12.5C12.2761 12.5 12.5 12.2761 12.5 12C12.5 11.7239 12.2761 11.5 12 11.5C11.7239 11.5 11.5 11.7239 11.5 12C11.5 12.2761 11.7239 12.5 12 12.5Z" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M17 12.5C17.2761 12.5 17.5 12.2761 17.5 12C17.5 11.7239 17.2761 11.5 17 11.5C16.7239 11.5 16.5 11.7239 16.5 12C16.5 12.2761 16.7239 12.5 17 12.5Z" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="d-flex gap-2 w-100 justify-content-between" style="margin-top: 6px;">
+            <h6 class="mb-0">More compounds</h6>
+        </div>
+    </a>
+</div>
+<div class="col-12 pt-4">
+    <h5>Highlighted chemistries</h5>
+    <p>Choose one of the highlighted chemistries or browse all of them.</p>
+</div>
+<div class="col-12 list-group">
+    {% assign chemlist = page.chemistries | split: ' ' %}
+    {% for chemname in chemlist %}
+        {% assign chem = site.chemistries | where: "name", chemname  | first %}
+        {% include chemistry.html chem=chem hide_enzyme_ids=true %}
+    {% endfor %}
+    <a href="/chemistries.html" class="list-group-item list-group-item-action list-group-item-secondary d-flex gap-3 py-3" aria-current="true">
+        <svg width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="rounded-circle flex-shrink-0" style="margin-top: 6px;">
+            <path d="M7 12.5C7.27614 12.5 7.5 12.2761 7.5 12C7.5 11.7239 7.27614 11.5 7 11.5C6.72386 11.5 6.5 11.7239 6.5 12C6.5 12.2761 6.72386 12.5 7 12.5Z" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 12.5C12.2761 12.5 12.5 12.2761 12.5 12C12.5 11.7239 12.2761 11.5 12 11.5C11.7239 11.5 11.5 11.7239 11.5 12C11.5 12.2761 11.7239 12.5 12 12.5Z" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M17 12.5C17.2761 12.5 17.5 12.2761 17.5 12C17.5 11.7239 17.2761 11.5 17 11.5C16.7239 11.5 16.5 11.7239 16.5 12C16.5 12.2761 16.7239 12.5 17 12.5Z" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="d-flex gap-2 w-100 justify-content-between" style="margin-top: 6px;">
+            <h6 class="mb-0">More chemistries</h6>
+        </div>
+    </a>
+</div>
